@@ -1,0 +1,21 @@
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: 'true'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+  - host: ticketing.info
+    http:
+      paths:
+      - path: /api/v0/?(.*)
+        backend:
+          serviceName: feed-srv
+          servicePort: 8080
+      # - path: /bar
+      #   backend:
+      #     serviceName: service2
+      #     servicePort: 8080            
